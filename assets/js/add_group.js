@@ -9,8 +9,6 @@ $(function() {
 		{
 			// Add $(this).val() to your list
 			utilisateurSelect[i]=$(this).val();
-			console.log(utilisateurSelect);
-			//console.log(i);
 		});
 
 		if(group_name!=""&&group_name!=null)
@@ -29,20 +27,22 @@ $(function() {
 							})
 						.done(function(data) {
 							console.log("success");
-							notification('good', 'Groupe crée !', 3000);
+							verificationNotifications('{"notification":"good_add_groupe"}');
 						})
 						.fail(function() {
 							console.log("error");
+							verificationNotifications('{"notification":"error"}');
+
 						})
 						.always(function() {
 							console.log
 						});
 						("complete");
 				}else{
-					notification('error', 'Personne n\'est affecté  ce groupe', 5000);	
+					verificationNotifications('{"notification":"error_groupe_users"}');
 				}
 		}else{
-			notification('error', 'Remplissez un Nom', 5000);
+			verificationNotifications('{"notification":"error_groupe_nom"}');
 		}
 
 	});

@@ -74,9 +74,9 @@ class account extends CI_Controller {
 				$password 		= $this->input->post('password_modif');
 				$password_modif = hash('sha256', $this->config->item('password_key').$password);
 
-				$this->load->model('Utilisateur_Model');
+				$this->load->model('Utilisateur_model');
 
-				if($this->Utilisateur_Model->Update($email_modif, $password_modif, $surnom_modif, $this->data['user']['email']))
+				if($this->Utilisateur_model->Update($email_modif, $password_modif, $surnom_modif, $this->data['user']['email']))
 				{
 					//TODO bug modif une fois tu peux plus modifier
 					$newdata = array(
@@ -123,7 +123,7 @@ class account extends CI_Controller {
 		
 		if ($this->input->post('id_groupe') != NULL) {
 			$this->load->model('Group_model');
-			$this->load->model('Utilisateur_Model');
+			$this->load->model('Utilisateur_model');
 
 
 			$idGroupSelect = $this->input->post('id_groupe'); 
@@ -131,18 +131,18 @@ class account extends CI_Controller {
 			$data = array(
 				'id_group'		=> $idGroupSelect,
 				'UsersGroup' 	=> $UsersGroup,
-				'UsersNotGroup' => $this->Utilisateur_Model->Get_All_User()
+				'UsersNotGroup' => $this->Utilisateur_model->Get_All_User()
 			);	
 
-			$this->load->view('templates/header', $data);
-			$this->load->view('modif_groupSelect', $data);
-			$this->load->view('templates/footer', $data);
+			$this->load->view('templates/header');
+			$this->load->view('modif_group', $data);
+			$this->load->view('templates/footer');
 		}		
 	}
 	public function modif_groupFamille(){
 
 		$this->load->model('Group_model');
-		$this->load->model('Utilisateur_Model');
+		$this->load->model('Utilisateur_model');
 
 
 		$groupFamille=$this->Group_model->Get_Group_Famille();
@@ -151,7 +151,7 @@ class account extends CI_Controller {
 		$data = array(
 				'id_group'		=> $groupFamille[0]['id_groupe'],
 				'UsersGroup' 	=> $UsersGroup,
-				'UsersNotGroup' => $this->Utilisateur_Model->Get_All_User()
+				'UsersNotGroup' => $this->Utilisateur_model->Get_All_User()
 			);	
 
 			$this->load->view('templates/header', $data);
@@ -193,13 +193,13 @@ class account extends CI_Controller {
 
 			for($i = 0 ; $i < count($utilisateurSelect); $i++)
 			{
-				$user = $this->Utilisateur_Model->Find_UserByEmail($utilisateurSelect[$i]);
+				$user = $this->Utilisateur_model->Find_UserByEmail($utilisateurSelect[$i]);
 				$this->Group_model->Add_User_Group($user['id_utilisateur'],$id_group);
 			}
 			//TODO comment retourné a l'index en load les view ? 
 		}else{
 			//prise de toute les utilisateur appartenant a un groupe dans lequel d'appartient
-			$data['users'] = $this->Utilisateur_Model->Get_All_User();
+			$data['users'] = $this->Utilisateur_model->Get_All_User();
 
 			if ($data == NULL) 
 			{

@@ -98,18 +98,24 @@ $(function() {
     	var element = this;
     	//alert($(element).parents('.memo_desc').children('#text_memo_desc').text());
 
-    	$(element).parents('.memo_desc').children('#modifTodo').css("display","block");
- 		$(element).parents('.memo_desc').children('#modifTodo').children('#text_todo_modif').val($(element).parents('.memo_desc').children('#text_memo_desc').text());
+    	$(element).parents('.memo_desc').children('#modifTodo_desc').css("display","block");
+    	$(element).parents('.memo').children('#modifTodo_titre').css("display","block");
+
+    	$(element).parents('.memo').children('.memo_title').css("display","none");
     	$(element).parents('.memo_desc').children('#text_memo_desc').css("display","none");
-    	$(element).parents('#icone_memo_desc').css("display","none");	
+    	$(element).parents('#icone_memo_desc').css("display","none");
+
+    	$(element).parents('.memo_desc').children('#modifTodo_desc').children('#desc_todo_modif').text($(element).parents('.memo_desc').children('#text_memo_desc').text());
+ 		$(element).parents('.memo').children('#modifTodo_titre').children('#titre_todo_modif').val($(element).parents('.memo').children('.memo_title').children('#text_memo_title').children('span').text());
+
     });  
 
-    $('#modifTodo .button').on('click', function() {
-    	if($(this).prev('#text_todo_modif').val() != '')
+    $('#modifTodo_desc .button').on('click', function() {
+    	if($(this).prev('#desc_todo_modif').val() != '')
     	{	
     		var element = this;
     		var name = $(this).parents('.memo_desc').prev('.memo_title').children('#text_memo_title').children('span').text();
-    		var description= $(this).prev('#text_todo_modif').val();
+    		var description= $(this).prev('#desc_todo_modif').val();
     		var id_element_todo = $(this).parents('li.memo').attr('id').split('_')[1];
 
 	    	$.ajax({
@@ -126,8 +132,14 @@ $(function() {
 					notification('good', 'Mémo modifié !', 3000);
 					$(element).parents('.memo_desc').children('#text_memo_desc').css("display","block");
     				$(element).parents('.memo_desc').children('#icone_memo_desc').css("display","block");
-    				$(element).parents('.memo_desc').children('#modifTodo').css("display","none");
- 					$(element).parents('.memo_desc').children('#text_memo_desc').text($(element).prev('#text_todo_modif').val());
+    				$(element).parents('.memo').children('.memo_title').css("display","block");
+
+
+			    	$(element).parents('.memo').children('#modifTodo_titre').css("display","none");
+    				$(element).parents('.memo_desc').children('#modifTodo_desc').css("display","none");
+ 					$(element).parents('.memo_desc').children('#text_memo_desc').text($(element).prev('#labelModif_desc').prev('#desc_todo_modif').text());
+ 					$(element).parents('.memo').children('.memo_title').children('#text_memo_title').children('span').text($(element).parents('.memo').parents('.modifTodo_titre').children('#titre_todo_modif').val());
+
 				} else {
 					notification('error', 'Une erreur est survenue.', 5000);
 				}
@@ -145,7 +157,6 @@ $(function() {
 		var name 		= $('#todo_name').val();
 		var description = $('#todo_description').val() 
 
-
 		if(name != ""&& name !=null)
 		{
 			if(description != ""&& description !=null)
@@ -162,6 +173,9 @@ $(function() {
 					if(data != 'nok'){				
 						var id = data.split('_');
 						notification('good', 'Mémo crée !', 3000);
+						$('#todo_name').val('');
+						$('#todo_description').val('');
+
 						var li=$("#listeMemos").append('<li class="memo" id="memo_'+id[1]+'"');
 						li.append('<div class="collapsible-header memo_title">\
 									<div class="s8 col" id="text_memo_title">\
@@ -178,7 +192,7 @@ $(function() {
 								</div>');
 						li.append('<div class="collapsible-body row memo_desc" id="desc_'+id[0]+'">\
 									<div class="input-field s12 col right-align" id="modifTodo" style="display:none">\
-										<input type="text" name="text_todo_modif" id="text_todo_modif" />\
+										<input type="text" name="desc_todo_modif" id="desc_todo_modif" />\
 										<input type="submit" id="Valid_Modif_todo" class="button" value="Valider">\
 									</div>\
 									<div class="s10 m11 col" id="text_memo_desc">'+description+'</div>\
@@ -195,7 +209,7 @@ $(function() {
 					</li>');
 
 					} else {
-						notification('error', 'Une erreur1 est survenue.', 5000);
+						notification('error', 'Une erreur est survenue.', 5000);
 					}
 				})
 				.fail(function() {
@@ -208,8 +222,6 @@ $(function() {
 		} else {
 			notification('error', 'Merci de donner un titre au mémo', 5000);		
 		}
-		$('#todo_name').val('');
-		$('#todo_description').val('');
 
 	});
 

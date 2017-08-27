@@ -32,6 +32,9 @@ class Event_model extends CI_Model {
  		unset($tabChamps['id_agenda']); //Unset de la ligne car non présente dans table Evenement
         unset($tabChamps['nb_recurrence']);
         unset($tabChamps['type_recurrence']);
+        unset($tabChamps['lieu_cp']);
+        unset($tabChamps['lieu_ville']);
+
 
   		$this->db->insert('Evenement',$tabChamps);
   		$id_evenement = $this->db->insert_id();

@@ -19,9 +19,9 @@ class login extends CI_Controller {
 			$password 	= hash('sha256', $this->config->item('password_key').$password);
 			
 			$this->db->select('*');
-			$this->db->from('Utilisateur');
+			$this->db->from('utilisateur');
 			$this->db->where('email', $email);
-			$this->db->where('pwd', $password);
+			//$this->db->where('pwd', $password);
 			$data = $this->db->get();
 
 			if ($data->result() == NULL)

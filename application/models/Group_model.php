@@ -31,7 +31,7 @@ class Group_model extends CI_Model {
 				WHERE U.id_utilisateur = A.id_utilisateur 
 				AND G.id_groupe= A.id_groupe 
 				AND U.email='".$this->session->userdata('Login')['email']."'
-				AND G.Famille = 1"; //lecture email avec la session
+				AND G.id_Famille = 1"; //lecture email avec la session
 
 		if ($query=$this->db->query($sql))
 		{
@@ -86,17 +86,12 @@ class Group_model extends CI_Model {
 	}
 
 	public function Add_Group($nom, $famille){
-		//select le max ID pour savoir l'id du groupe crée
-		$this->db->select_max('id_groupe');
-    	$this->db->from('Groupe');
-    	$data = $this->db->get();
-    	$data = $data->row();
 
-		if($nom != NULL && $data != NULL)
+		if($nom != NULL && $famille != NULL)
 		{
 			$data = array(
 				'nom'		=> $nom,
-				'famille' 	=> $famille
+				'id_famille' 	=> $famille
 			);
 
 			$this->db->insert('Groupe',$data);
@@ -112,7 +107,6 @@ class Group_model extends CI_Model {
 			'id_groupe' => $id_groupe
 		);
 		$this->db->insert('appartenir',$data);
-
 	}
 
 	public function Delete_User_Group($id_groupe){

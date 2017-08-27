@@ -164,8 +164,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						Sombre
 					</label>
 				</div>-->
+				<div class="mg-20 float-right" >
+					<label id="div_date"></label></br>
+					<label id="div_heure"></label>
+				</div>
 			</div>
-
 
 		</header>
 		<?php } ?>

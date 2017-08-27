@@ -15,6 +15,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					foreach ($todo as $row) {
 				?>
 					<li class="memo" id="memo_<?= $row['id_element_todo']; ?>">
+						<div class="header input-field s12 col right-align" id="modifTodo_titre" style="display:none">
+							<input type="text" name="titre_todo_modif" id="titre_todo_modif" />
+							<label class="m10" for="titre_todo_modif">Titre</label>
+						</div>
 						<div class="collapsible-header memo_title">
 							<div class="s8 col" id="text_memo_title">
 								<span><?= $row['titre']; ?></span>
@@ -29,12 +33,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 						</div>
 						<div class="collapsible-body row memo_desc" id="desc_<?= $row['id_todo']; ?>">
-							<div class="input-field s12 col right-align" id="modifTodo" style="display:none">
-								<input type="text" name="text_todo_modif" id="text_todo_modif" />
+							<div class="input-field s12 col right-align" id="modifTodo_desc" style="display:none">
+								<textarea class="materialize-textarea" name="desc_todo_modif" id="desc_todo_modif" ></textarea>
+								<label id="labelModif_desc"for="desc_todo_modif">Description</label>
 								<input type="submit" id="Valid_Modif_todo" class="button" value="Valider">
 							</div>
 
-							<div class="s10 m11 col" id="text_memo_desc"><?= $row['description']; ?></div>
+							<textarea readonly class="materialize-textarea s10 m11 col" id="text_memo_desc"><?= $row['description']; ?></textarea>
 							<div class="s2 m1 col" id="icone_memo_desc">
 								<div class="float_right">
 									<div class="editTodo">
