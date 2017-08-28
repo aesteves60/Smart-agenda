@@ -112,8 +112,19 @@ class Group_model extends CI_Model {
 	public function Delete_User_Group($id_groupe){
 		$this->db->where('id_groupe', $id_groupe);
 		$this->db->delete('appartenir');
-
 	}
+
+	public function Delete_User_Group($id_groupe){
+		
+		if($id_groupe != NULL){
+			$this->db->where('id_groupe', $id_groupe);
+			$this->db->delete('Groupe');
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
 }
 
 ?>

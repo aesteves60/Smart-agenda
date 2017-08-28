@@ -44,7 +44,6 @@ $(function() {
 		}else{
 			verificationNotifications('{"notification":"error_groupe_nom"}');
 		}
-
 	});
 
 	$('#btnRight').click(function (e) {

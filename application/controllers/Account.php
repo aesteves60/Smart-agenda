@@ -139,6 +139,21 @@ class account extends CI_Controller {
 			$this->load->view('templates/footer');
 		}		
 	}
+
+	public function delete_group(){
+
+		$this->load->model('Group_model'); 
+
+		if ($this->input->post('id_groupe')) {
+			if($this->Group_model->delete_group()){
+				redirect_error('Account/modif_group', 'good_delete_group');	
+			}
+		}
+
+
+
+	}
+
 	public function modif_groupFamille(){
 
 		$this->load->model('Group_model');
