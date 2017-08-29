@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="input-field s10 offset-s1 m8 offset-m2 col"> 
 
 					<select name="id_groupe" id="list_group">
-						<option value=""></option>
+						<option value="" disabled selected></option>
 
 						<?php foreach ($groupes as $groupe) {
 							echo "<option value='".$groupe['id_groupe']."'>".$groupe['nom']."</option>";
