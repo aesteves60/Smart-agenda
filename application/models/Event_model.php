@@ -81,6 +81,8 @@ class Event_model extends CI_Model {
 		unset($tabChamps['id_agenda']);
         unset($tabChamps['nb_recurrence']);
         unset($tabChamps['type_recurrence']);
+        unset($tabChamps['lieu_cp']);
+        unset($tabChamps['lieu_ville']);
 
 		$this->db->where('id_evenement', $tabChamps['id_evenement']);
  	    $this->db->update('Evenement',$tabChamps);

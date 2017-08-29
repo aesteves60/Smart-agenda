@@ -37,8 +37,11 @@ $(function() {
 
 			if(info['id_evenement'] != '' && info['id_evenement'] != null){
 				var URL = BASE_URL+'Event/editEvent';
+                var notification = 'L\'évenement à été modifié';
 			} else {
 				var URL = BASE_URL+'Event/addEvent';
+                var notification = 'L\'évenement à été crée';
+
 			}
 
 			$.ajax({
@@ -48,7 +51,7 @@ $(function() {
 			})
 			.done(function(data) {
                 data = JSON.parse(data);
-				notification('good', 'Evènement ajouté à l\'agenda !', 3000);
+				notification('good', notification, 3000);
 
                 if(info['id_evenement'] != '' && info['id_evenement'] != null){
                 	$('#calendar').fullCalendar('renderEvent', {
@@ -75,6 +78,14 @@ $(function() {
 		detected=false;
 
 		});
+    $('.add_event').on('click', function() {
+        $( '#div_champ_event input:text').each(function() {
+            $(this).val('');
+            alert($(this).val());
+        });
+        $('#event_description').val('');
+    });
+
     var event_id;
     var detected=false;
     $('#event_name').on('keyup',function(){

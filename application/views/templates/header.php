@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 	<meta charset="utf-8" />
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<title><?= $this->config->item('site_name'); ?></title>
@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</a>
 					<div class="collapsible-body">
 						<ul>
-							<li class="">
+							<li class="add_event">
 								<a href="#modalAddEvent">Nouvel Evènement</a>
 							</li>
 						</ul>

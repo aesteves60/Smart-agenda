@@ -1,5 +1,5 @@
 	<div id="modalAddEvent" class="modal modal-fixed-footer">
-		<div class="modal-content">
+		<div class="modal-content" id="div_champ_event">
 
 			<div class="row input-field">
 				<input type="text" name="event_name" id="event_name">
