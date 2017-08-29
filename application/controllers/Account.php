@@ -106,7 +106,7 @@ class account extends CI_Controller {
 
 	}
 
-	public function modif_group(){
+	public function choix_group(){
 
 		$this->load->model('Group_model'); 
 
@@ -115,11 +115,11 @@ class account extends CI_Controller {
 		$this->data['groupes'] = $this->Group_model->Get_Group_User();
 
 		$this->load->view('templates/header', $this->data);
-		$this->load->view('modif_group', $this->data);
+		$this->load->view('choix_group', $this->data);
 		$this->load->view('templates/footer', $this->data);
 	}
 
-	public function modif_groupSelect(){
+	public function modif_group(){
 		
 		if ($this->input->post('id_groupe') != NULL) {
 			$this->load->model('Group_model');
@@ -145,12 +145,11 @@ class account extends CI_Controller {
 		$this->load->model('Group_model'); 
 
 		if ($this->input->post('id_groupe')) {
-			if($this->Group_model->delete_group()){
-				redirect_error('Account/modif_group', 'good_delete_group');	
+			$id_groupe = $this->input->post('id_groupe');
+			if($this->Group_model->delete_group($id_groupe)){
+				redirect_error('Account/choix_group', 'good_delete_group');	
 			}
 		}
-
-
 
 	}
 

@@ -58,7 +58,7 @@ $(function() {
                         end: getDateEvent(dateFin,timeFin)
                 	});
                 }
-                $('#modalAddEvent').modal('close');
+                $('#modalAddEvent').modal('close'); 
                 location.reload();
 			})
 			.fail(function() {

@@ -44,7 +44,7 @@ var utilisateurSelect = {};
         var url = window.location.href;
         var segments = url.split( '/' );
         var id_groupeSelect = segments[6];
-        //console.log(id_groupeSelect);
+
 
         if(utilisateurSelect!=null && utilisateurSelect!="")
         {

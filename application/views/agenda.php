@@ -73,6 +73,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 
 	</div>
+	<div class="fixed-action-btn">
+    <a class="btn-floating red-alert" href="#modalAddEvent">
+      <i class="fa fa-plus"></i>
+    </a>
+  </div>
 
 
 <script>

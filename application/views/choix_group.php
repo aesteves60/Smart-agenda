@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="s12 m10 offset-m1 col">
 		<div class="panel">
 			<h2 class="text-center">Gérer les groupes</h2>
-			<form id="form_modif_groupSelect" method="post" action="">
+			<form id="form_choix_group" method="post" action="">
 				 
 				<div class="input-field s10 offset-s1 m8 offset-m2 col"> 
 
@@ -21,17 +21,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				</div>
 
-			</form>
 			<div class="s6 offset-s3 col text-center row">
+				<input type="submit" id="valide_choix_group" class="button mg-20" value="Valider">
 				<a href="add_group " class="button inverted">Ajouter</a>
 			</div>
 
-			</div>
+			</form>
+
+
 			<div class="row clear"></div>	
 		</div>
 	</div>
 </div>
 
 
-<script src="<?= asset_url(); ?>js/modif_group.js"></script>
-<script src="<?= asset_url(); ?>js/jquery.selectlistactions.js"></script>
+<script src="<?= asset_url(); ?>js/choix_group.js"></script>

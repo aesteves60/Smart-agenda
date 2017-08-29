@@ -68,5 +68,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 
-<script src="<?= asset_url(); ?>js/modif_groupSelect.js"></script>
+<script src="<?= asset_url(); ?>js/modif_group.js"></script>
 <script src="<?= asset_url(); ?>js/jquery.selectlistactions.js"></script>

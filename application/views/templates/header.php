@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<a href="<?= base_url(); ?>Account/modif_user">Modifier</a>
 							</li>
 							<li class="<?php if($this->uri->segment(2) == 'profil') echo 'active'; ?>">
-								<a href="<?= base_url(); ?>Account/modif_group">Gérer les groupes</a>
+								<a href="<?= base_url(); ?>Account/choix_group">Gérer les groupes</a>
 							</li>
 						</ul>
 					</div>
