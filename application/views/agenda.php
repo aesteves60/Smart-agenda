@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</select>
 				<?php } else { ?>
 					<p>Vous n'avez pas d'autre agenda enregistré. Créez-en un !</p>
-				<?php } ?>
+				<?php } ; var_dump($datas);?>
 				</div>
 
 				<div class="clear"></div>
@@ -83,7 +83,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script>
 
 	$(document).ready(function() {
-		
+		var c = 0x0000FF;
+		for (var i = 0; i < $datas['nb_agendas']; i++){
+			//c[i] = c[i]+255;
+		}
+
 		$('#calendar').fullCalendar({
 			locale: 'fr',
 			header: {
@@ -96,9 +100,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
 			timezone: "<?php echo 'UTC+'.date('Z')/3600; ?>",
+			//color: #f00000,
 			events: 
 				<?php echo $datas["events"]; ?>,
-			eventClick: function(event, element) {
+						eventClick: function(event, element) {
 				updateEvent(event);
 			}
 			

@@ -81,7 +81,6 @@ $(function() {
     $('.add_event').on('click', function() {
         $( '#div_champ_event input:text').each(function() {
             $(this).val('');
-            alert($(this).val());
         });
         $('#event_description').val('');
     });

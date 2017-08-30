@@ -188,7 +188,7 @@ class Event_model extends CI_Model {
 		if($id_agenda != NULL){
 			$this->db->where("Agenda.id_agenda", $id_agenda);
 		} elseif($this->session->userdata("Agenda")["id_agenda"] != NULL) {
-			$this->db->where("Agenda.id_agenda", $this->session->userdata("Agenda")["id_agenda"]);
+			//$this->db->where("Agenda.id_agenda", $this->session->userdata("Agenda")["id_agenda"]);
 		}
 
 		if($id_user != NULL){

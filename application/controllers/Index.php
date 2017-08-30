@@ -51,17 +51,19 @@ class Index extends CI_Controller {
 		$i = 0;
 		//Convertion des champs de la BDD vers les champs attendus par le plugin JS
 		foreach ($events as $event) {
-			$datas['events'][$i]['id'] 		= $event['id_evenement'];
-			$datas['events'][$i]['title'] 	= $event['nom_evenement'];
-			$datas['events'][$i]['start']	= date('Y-m-d', $event['date_deb']);
-			$datas['events'][$i]['end']		= date('Y-m-d', $event['date_fin']);
-			$datas['events'][$i]['start']	.= 'T'.date('H:i:s', $event['date_deb']);
-			$datas['events'][$i]['end']		.= 'T'.date('H:i:s', $event['date_fin']);
+			$datas['events'][$i]['id'] 			= $event['id_evenement'];
+			$datas['events'][$i]['id_agenda'] 	= $event['id_agenda'];
+			$datas['events'][$i]['title'] 		= $event['nom_evenement'];
+			$datas['events'][$i]['start']		= date('Y-m-d', $event['date_deb']);
+			$datas['events'][$i]['end']			= date('Y-m-d', $event['date_fin']);
+			$datas['events'][$i]['start']		.= 'T'.date('H:i:s', $event['date_deb']);
+			$datas['events'][$i]['end']			.= 'T'.date('H:i:s', $event['date_fin']);
 			$i++;
 		}
 
-		$datas['events'] = json_encode($datas['events']);
-		$datas['agendas'] = $this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
+		$datas['events'] 		= json_encode($datas['events']);
+		$datas['agendas'] 		= $this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
+		$datas['nb_agendas'] 	= count($datas['agendas']);
 
 		$data = array(
 
