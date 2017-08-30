@@ -59,7 +59,6 @@ class Event extends CI_Controller {
 		
 		$data = $this->input->post('tab');
 		$this->Event_model->Update($data);
-
 	}
 
     public function getEvent(){

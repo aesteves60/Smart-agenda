@@ -44,25 +44,37 @@ class Index extends CI_Controller {
 	public function agenda(){
 
 		date_default_timezone_set('Europe/Paris');
-
-		$events = $this->Event_model->getByUser();
-
 		$datas['events'] = [];
-		$i = 0;
-		//Convertion des champs de la BDD vers les champs attendus par le plugin JS
-		foreach ($events as $event) {
-			$datas['events'][$i]['id'] 			= $event['id_evenement'];
-			$datas['events'][$i]['id_agenda'] 	= $event['id_agenda'];
-			$datas['events'][$i]['title'] 		= $event['nom_evenement'];
-			$datas['events'][$i]['start']		= date('Y-m-d', $event['date_deb']);
-			$datas['events'][$i]['end']			= date('Y-m-d', $event['date_fin']);
-			$datas['events'][$i]['start']		.= 'T'.date('H:i:s', $event['date_deb']);
-			$datas['events'][$i]['end']			.= 'T'.date('H:i:s', $event['date_fin']);
-			$i++;
+		$j = 0;
+		$c = array(
+             '0' => '#ff0000',
+             '1' => '#0000ff',
+             '2' => '#00ff00',
+             '3' => '#ff0000'
+ 		);
+
+		$datas['agendas'] 		= $this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
+		$datas['nb_agendas'] 	= count($datas['agendas']);
+		for($i=0;$i<$datas['nb_agendas']; $i++)
+		{
+			$events = $this->Event_model->getByUser($datas['agendas'][$i]['id_agenda']);
+
+			//Convertion des champs de la BDD vers les champs attendus par le plugin JS
+			foreach ($events as $event) {
+				$datas['events'][$j]['id'] 			= $event['id_evenement'];
+				$datas['events'][$j]['id_agenda'] 	= $event['id_agenda'];
+				$datas['events'][$j]['title'] 		= $event['nom_evenement'];
+				$datas['events'][$j]['start']		= date('Y-m-d', $event['date_deb']);
+				$datas['events'][$j]['end']			= date('Y-m-d', $event['date_fin']);
+				$datas['events'][$j]['start']		.= 'T'.date('H:i:s', $event['date_deb']);
+				$datas['events'][$j]['end']			.= 'T'.date('H:i:s', $event['date_fin']);
+				$datas['events'][$j]['backgroundColor'] = $c[$i];
+				$datas['events'][$j]['borderColor'] = $c[$i];
+				$j++;
+			}
 		}
 
 		$datas['events'] 		= json_encode($datas['events']);
-		$datas['agendas'] 		= $this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
 		$datas['nb_agendas'] 	= count($datas['agendas']);
 
 		$data = array(

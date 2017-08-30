@@ -49,7 +49,7 @@ $(function() {
 				type: 'POST',
 				data : {tab:info},
 			})
-			.done(function(data) {
+			.done(function(data) {   
                 data = JSON.parse(data);
 				notification('good', notification, 3000);
 
@@ -68,9 +68,6 @@ $(function() {
 				notification('error', 'Une erreur est survenue lors de l\'ajout à l\'agenda.', 5000);
 			})
 			.always(function() {
-				$('modalAddEvent input').each(function(){
-					$(this).val('');
-				});
 			});
 		}else{
 			champsObligatoireNotGood=0;
