@@ -5,8 +5,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="row">
 
 		<div class="s12 col ">
+			<div class="panel" >
+			<label>Choix agenda afficher</label>
+			<div class="row"></div>
+				<?php if(is_array($datas['agendas']) && count($datas['agendas']) > 1){
+					$i=0;
+					foreach ($datas['agendas'] as $agenda){
+						echo"<div id='".$datas['color'][$i]."_b'  class='chip ".$datas['color'][$i]."_b'>";
+    					echo $agenda['nom'];
+  						echo"</div>";
+  						$i++;
+  					}
+  				}else{
+  					echo "<p>Vous n'avez pas d'autre agenda enregistré. Créez-en un !</p>";
+  					}?>
+			</div>
+		</div>
+
+		<div class="s12 col ">
 			<div class="panel">
-			<a class=" btn">button</a>
 			<div class="row clear"></div>
 
 				<div id='calendar'></div>
@@ -85,6 +102,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script>
 
 	$(document).ready(function() {	
+ 		//$('.chips').material_chip();
+
 		$('#calendar').fullCalendar({
 			locale: 'fr',
 			header: {

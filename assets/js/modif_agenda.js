@@ -9,6 +9,32 @@ $(function() {
 		e.preventDefault();
 		createAgenda();
 	});
+	$('.chip').on('click', function(e) {
+		var couleur=$(this).attr("id");
+		var affiche;
+		if($(this).hasClass(couleur))
+		{
+			$(this).removeClass(couleur);
+			affiche=0;
+		}else{
+			$(this).addClass(couleur);
+			affiche=1;
+		}
+
+		$.ajax({
+			url 	 : BASE_URL+'Index/setAgendaAfficher',
+			type 	 : 'POST',
+			data 	 : {
+				affiche : affiche
+			},
+		})
+		.done(function(data) {
+			location.reload();
+		})
+		.fail(function() {
+			verificationNotifications('{"notification":"error"}');
+		});
+	});
 
 });
 

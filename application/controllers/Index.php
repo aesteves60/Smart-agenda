@@ -47,15 +47,15 @@ class Index extends CI_Controller {
 		$datas['events'] = [];
 		$j = 0;
 		$c = array(
-             '0' => '#ff0000',
-             '1' => '#0000ff',
-             '2' => '#00ff00',
-             '3' => '#ff0000'
+             '0' => 'red',
+             '1' => 'blue',
+             '2' => 'green',
+             '3' => 'yellow'
  		);
+ 		$datas['color'] = $c;
 
 		$datas['agendas'] 		= $this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
-		$datas['nb_agendas'] 	= count($datas['agendas']);
-		for($i=0;$i<$datas['nb_agendas']; $i++)
+		for($i=0;$i<count($datas['agendas']); $i++)
 		{
 			$events = $this->Event_model->getByUser($datas['agendas'][$i]['id_agenda']);
 
@@ -92,7 +92,6 @@ class Index extends CI_Controller {
 			),
 
 			'datas' 		=> $datas
-
 		);
 
 		$this->load->view('templates/header', $data);
@@ -127,6 +126,16 @@ class Index extends CI_Controller {
 	public function verificationNotifications(){
 		$notif = verificationNotifications($this->input->post_get('erreur'));
 		echo $notif;
+	}
+
+	public function setAgendaAfficher{
+		if($this->input->post_get('affiche') != NULL){
+			$this->load->a
+			$affiche=$this->Agenda_model->getByUser($this->input->post_get('affiche')
+			$this->Agenda_model->Add($params);
+			
+			return TRUE;
+		} else return NULL;
 	}
 
 }
