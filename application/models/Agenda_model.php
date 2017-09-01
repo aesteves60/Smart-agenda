@@ -72,5 +72,15 @@ class Agenda_model extends CI_Model {
 
 	}
 
+	public function setAfficher($id_agenda = NULL, $afficher = NULL){
+
+		$data = array(
+			'afficher'  => $afficher
+		);
+
+		$this->db->set($data);
+		$this->db->where('id_agenda', $id_agenda);
+		$this->db->update('agenda');
+	}
 
 }

@@ -54,7 +54,7 @@ class Index extends CI_Controller {
  		);
  		$datas['color'] = $c;
 
-		$datas['agendas'] 		= $this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
+		$datas['agendas'] = $this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
 		for($i=0;$i<count($datas['agendas']); $i++)
 		{
 			$events = $this->Event_model->getByUser($datas['agendas'][$i]['id_agenda']);
@@ -128,11 +128,11 @@ class Index extends CI_Controller {
 		echo $notif;
 	}
 
-	public function setAgendaAfficher{
-		if($this->input->post_get('affiche') != NULL){
-			$this->load->a
-			$affiche=$this->Agenda_model->getByUser($this->input->post_get('affiche')
-			$this->Agenda_model->Add($params);
+	public function setAgendaAfficher(){
+		if($this->input->post_get('id_agenda') != NULL && $this->input->post_get('affiche') != NULL){
+			$id_agenda=$this->input->post_get('id_agenda');
+			$affiche=$this->input->post_get('affiche');
+			$this->Agenda_model->setAfficher($id_agenda, $affiche);
 			
 			return TRUE;
 		} else return NULL;

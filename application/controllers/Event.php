@@ -83,12 +83,8 @@ class Event extends CI_Controller {
 
 	public function chercheSimilaire(){
 		$titre = $this->input->post('titre');
-        $description = $this->input->post('description');
 		if($titre){
-			$iaDetected = $this->Event_model->rechercheSimilaire(null,$titre,"nom");
-		}
-		else if($description){
-            $iaDetected = $this->Event_model->rechercheSimilaire(null,$description,"description");
+			$iaDetected = $this->Event_model->rechercheSimilaire($titre);
 		}
 		echo json_encode($iaDetected);
 	}

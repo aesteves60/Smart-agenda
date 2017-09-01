@@ -82,68 +82,45 @@ $(function() {
         $('#event_description').val('');
     });
 
-    var event_id;
-    var detected=false;
+
+    var event_id = {};
+    var detected = false;
     $('#event_name').on('keyup',function(){
     	var titre = $('#event_name').val();
     	nbFrape ++;
-        if(detected==false) {
-            if (titre.length > 3 && nbFrape >= 3) {
-                nbFrape = 0;
-                $.ajax({
-                    url: BASE_URL + 'Event/chercheSimilaire',
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data: {
-                        titre: titre
-                    },
-                })
-                    .done(function (data) {
-                        if (data) {
-                            event_id = data.id;
-                            affichePropositionEvent();
-                            $('#modalAcceptEvent').modal('open');
-                            detected=true;
-                        }
-                    })
-                    .fail(function () {
-                        verificationNotifications('{"notification":"error"}');
-                    })
-                    .always(function () {
-                    });
-            }
+        if (titre.length > 1 && nbFrape >= 1) {
+            nbFrape = 0;
+            $.ajax({
+                url: BASE_URL + 'Event/chercheSimilaire',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    titre: titre
+                },
+            })
+            .done(function (reponse) {
+                if (reponse) {
+                    reponse = JSON.parse(reponse);
+                    event_id = reponse.id;
+                    $('input.autocomplete').autocomplete({
+                        data: reponse.nom,
+                        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                        onAutocomplete: function(val) {
+                          
+                        },
+                        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+                      });
+                    $('#modalAcceptEvent').modal('open');
+                }
+            })
+            .fail(function () {
+                //verificationNotifications('{"notification":"error"}');
+            })
+            .always(function () {
+            });
         }
 	});
-    $('#event_description').on('keyup',function(){
-        var description = $('#event_description').val();
-        nbFrape ++;
-        if(detected==false) {
-            if (description.length > 3 && nbFrape >= 3) {
-                nbFrape = 0;
-                $.ajax({
-                    url: BASE_URL + 'Event/chercheSimilaire',
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data: {
-                        description: description
-                    },
-                })
-                    .done(function (data) {
-                        if (data) {
-                            event_id = data.id;
-                            affichePropositionEvent();
-                            $('#modalAcceptEvent').modal('open');
-                            detected=true;
-                        }
-                    })
-                    .fail(function () {
-                        //verificationNotifications('{"notification":"error"}');
-                    })
-                    .always(function () {
-                    });
-            }
-        }
-    });
+    
     $("#accept_action").on('click',function(){
         var event_id = $('#id_evenement').val();
         $.ajax({

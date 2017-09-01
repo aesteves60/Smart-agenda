@@ -2,7 +2,7 @@
 		<div class="modal-content" id="div_champ_event">
 
 			<div class="row input-field">
-				<input type="text" name="event_name" id="event_name">
+				<input type="text" name="event_name" id="event_name" class="autocomplete">
 				<label for="event_name">Nom de l'évènement</label>
 			</div>
 

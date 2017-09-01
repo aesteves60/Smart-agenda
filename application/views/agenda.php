@@ -8,13 +8,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="panel" >
 			<label>Choix agenda afficher</label>
 			<div class="row"></div>
-				<?php if(is_array($datas['agendas']) && count($datas['agendas']) > 1){
+				<?php if(is_array($datas['agendas']) && count($datas['agendas']) >= 1){
 					$i=0;
 					foreach ($datas['agendas'] as $agenda){
-						echo"<div id='".$datas['color'][$i]."_b'  class='chip ".$datas['color'][$i]."_b'>";
-    					echo $agenda['nom'];
-  						echo"</div>";
-  						$i++;
+						if($agenda['afficher'] == 1){
+							echo"<div id='".$datas['agendas'][$i]['id_agenda']."' name='".$datas['color'][$i]."_b'  class='chip ".$datas['color'][$i]."_b'>";
+	    					echo $agenda['nom'];
+	  						echo"</div>";
+	  						$i++;
+	  					}else{
+	  						echo"<div id='".$datas['agendas'][$i]['id_agenda']."' name='".$datas['color'][$i]."_b'  class='chip'>";
+	    					echo $agenda['nom'];
+	  						echo"</div>";
+	  						$i++;
+
+	  					}
   					}
   				}else{
   					echo "<p>Vous n'avez pas d'autre agenda enregistré. Créez-en un !</p>";
@@ -36,9 +44,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	</div>
 
-	<div class="row">
 
-		<div class="s12 m6 col ">
+<!-- 		<div class="s12 m6 col ">
 			<div class="panel">
 				<h3>Choix de l'agenda</h3>
 
@@ -57,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="clear"></div>
 
 			</div>
-		</div>
+		</div> -->
 
 		<div class="s12 m6 col ">
 			<div class="panel">

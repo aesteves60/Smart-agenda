@@ -88,8 +88,21 @@ class Event_model extends CI_Model {
  	    $this->db->update('Evenement',$tabChamps);
     }
 
-    public function rechercheSimilaire($agenda = NULL, $laRecherche = NULL, $leType = NULL){
-	    //recherche des evenement potentiellement recherchble
+    public function rechercheSimilaire($laRecherche = NULL){
+
+        $this->db->select("E.*, E.nom AS nom_evenement");
+        $this->db->from("Evenement E");
+        $this->db->join("constituer", "E.id_evenement = constituer.id_evenement", "LEFT");
+        $this->db->join("Agenda", "Agenda.id_agenda = constituer.id_agenda", "LEFT");
+        $this->db->where("Agenda.id_utilisateur", $this->session->userdata("Login")["id_utilisateur"]);
+        $this->db->like('E.nom', $laRecherche, 'after');
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+
+
+	    /*//recherche des evenement potentiellement recherchble
         $dateDuJour = new DateTime();
 
 
@@ -153,7 +166,7 @@ class Event_model extends CI_Model {
                 }
             }
         }
-        return $iaDetected;
+        return $iaDetected;*/
     }
 
     public function acceptEvent($event_id){
@@ -197,6 +210,7 @@ class Event_model extends CI_Model {
 			$this->db->where("Agenda.id_utilisateur", $this->session->userdata("Login")["id_utilisateur"]);
 		}
 
+        $this->db->where("Agenda.afficher = 1");
 		$this->db->order_by("Agenda.id_agenda", "ASC");
 
 		$query = $this->db->get();

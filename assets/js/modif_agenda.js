@@ -10,22 +10,24 @@ $(function() {
 		createAgenda();
 	});
 	$('.chip').on('click', function(e) {
-		var couleur=$(this).attr("id");
+		var id_agenda	= $(this).attr("id");
+		var couleur 	= $(this).attr("name");
 		var affiche;
 		if($(this).hasClass(couleur))
 		{
 			$(this).removeClass(couleur);
-			affiche=0;
+			affiche = 0;
 		}else{
 			$(this).addClass(couleur);
-			affiche=1;
+			affiche = 1;
 		}
 
 		$.ajax({
 			url 	 : BASE_URL+'Index/setAgendaAfficher',
 			type 	 : 'POST',
 			data 	 : {
-				affiche : affiche
+				id_agenda 	: id_agenda,
+				affiche 	: affiche
 			},
 		})
 		.done(function(data) {
