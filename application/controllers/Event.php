@@ -65,6 +65,12 @@ class Event extends CI_Controller {
         echo json_encode($this->Event_model->get($this->input->post_get('id_event')));
     }
 
+    public function getEventByNom(){
+    	if($this->input->post_get('event_nom')){
+        	echo json_encode($this->Event_model->getByNom($this->input->post_get('event_nom')));
+    	}
+    }
+
     public function acceptEvent(){
         $event_id = $this->input->post('id_event');
         $evenement = $this->Event_model->acceptEvent($event_id);

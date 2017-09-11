@@ -219,5 +219,20 @@ class Event_model extends CI_Model {
 
 	}
 
+    public function getByNom($nom = NULL){
+
+        if($nom != NULL){
+
+            $this->db->from('Evenement E');
+            $this->db->where('E.nom', $nom);
+            $this->db->join('constituer C', 'C.id_evenement = E.id_evenement');
+            $query = $this->db->get();
+
+            return $query->row();
+
+        } else return NULL;
+
+    }
+
 
 }

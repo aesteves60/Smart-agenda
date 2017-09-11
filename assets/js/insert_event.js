@@ -82,8 +82,7 @@ $(function() {
         $('#event_description').val('');
     });
 
-
-    var event_id = {};
+    var event_nom = {};
     var detected = false;
     $('#event_name').on('keyup',function(){
     	var titre = $('#event_name').val();
@@ -100,17 +99,20 @@ $(function() {
             })
             .done(function (reponse) {
                 if (reponse) {
-                    reponse = JSON.parse(reponse);
-                    event_id = reponse.id;
+                    //var json = $.parseJSON(reponse);
+                    //event_id = ArrayReponse[0].id;
+                     for (var i=0;i<reponse.length;i++)
+                    {
+                        event_nom[reponse[i].nom]=i;
+                    }
                     $('input.autocomplete').autocomplete({
-                        data: reponse.nom,
-                        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                        data: event_nom,
+                        limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
                         onAutocomplete: function(val) {
-                          
+                            affichePropositionEvent(val);    
                         },
                         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-                      });
-                    $('#modalAcceptEvent').modal('open');
+                    });
                 }
             })
             .fail(function () {
@@ -120,48 +122,7 @@ $(function() {
             });
         }
 	});
-    
-    $("#accept_action").on('click',function(){
-        var event_id = $('#id_evenement').val();
-        $.ajax({
-            url: BASE_URL+'Event/acceptEvent',
-            type: 'POST',
-            dataType: 'json',
-            data: {id_event: event_id},
-        })
-            .done(function(data) {
-                $('#event_name').val(data.nom);
-                $('#event_description').val(data.description);
-                $('#lieu_cp').val(data.lieu_cp);
-                $('#lieu_ville').val(data.lieu_ville);
-                $('#id_evenement').val('');
-            })
-            .fail(function() {
-                //verificationNotifications('{"notification":"error"}');
-            })
-            .always(function() {
-            });
-        $('#modalAcceptEvent').modal('close');
-    });
 
-    $("#decline_action").on('click',function(){
-        var event_id = $('#id_evenement').val();
-        $.ajax({
-            url: BASE_URL+'Event/refuseEvent',
-            type: 'POST',
-            dataType: 'html',
-            data: {id_event: event_id},
-        })
-        .done(function(data) {
-
-        })
-        .fail(function() {
-            verificationNotifications('{"notification":"error"}');
-        })
-        .always(function() {
-        });
-        $('#modalAcceptEvent').modal('close');
-    });
 
     $('#delete_event').on('click', function() {
         var event_id = $('#id_evenement').val();
@@ -191,12 +152,13 @@ $(function() {
         $('#modalShareEvent').modal('open');
     });*/
 
-    function affichePropositionEvent(){
+    function affichePropositionEvent(nom){
+
         $.ajax({
-            url: BASE_URL+'Event/getEvent',
+            url: BASE_URL+'Event/getEventByNom',
             type: 'POST',
             dataType: 'JSON',
-            data: {id_event: event_id
+            data: {event_nom: nom
             },
         })
             .done(function(data) {
