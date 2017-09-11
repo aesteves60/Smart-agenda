@@ -166,7 +166,7 @@ $(function() {
                 $("#prop_description").text(data.description);
                 $("#prop_cp").text(data.lieu_cp);
                 $("#prop_ville").text(data.lieu_ville);
-                $('#id_evenement').val(event_id);
+                //$('#id_evenement').val(event_id);
             })
             .fail(function() {
                 verificationNotifications('{"notification":"error"}');

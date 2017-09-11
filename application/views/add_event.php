@@ -9,7 +9,7 @@
 			<div class="row input-field">
 				<textarea class="materialize-textarea" id="event_description" name="event_description"></textarea>
 				<label for="event_description">Déscription de l'évènement</label>
-			</div> 
+			</div>
 
 			<div class="row">
 				<div class="s6 col">

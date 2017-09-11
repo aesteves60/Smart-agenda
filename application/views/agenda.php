@@ -116,7 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,listWeek'
+				right: 'month, week, day, listWeek'
 			},
 			defaultDate: '<?= date('Y-m-d'); ?>',
 			navLinks: true, // can click day/week names to navigate views

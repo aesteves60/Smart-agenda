@@ -223,6 +223,7 @@ class Event_model extends CI_Model {
 
         if($nom != NULL){
 
+            $this->db->select('E.*');
             $this->db->from('Evenement E');
             $this->db->where('E.nom', $nom);
             $this->db->join('constituer C', 'C.id_evenement = E.id_evenement');
