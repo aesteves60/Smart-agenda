@@ -9,11 +9,11 @@ $(function() {
 		 champsObligatoireNotGood = 0;
 		 info['nom']=$('#event_name').val()==""?alertChampsObligatoire($('#event_name')):$('#event_name').val();
 		 info['description'] =$('#event_description').val(); 
-		 var dateDeb = $('#event_date_deb').val()==""?alertChampsObligatoire($('#event_date_deb')):$('#event_date_deb').val();
-		 var timeDeb = $('#event_time_deb').val()==""?alertChampsObligatoire($('#event_time_deb')):$('#event_time_deb').val();
+		 var dateDeb = $('#event_date_deb').val();
+		 var timeDeb = $('#event_time_deb').val();
 		 info['date_deb'] = getTimeStamp(dateDeb,timeDeb);
-		 var dateFin = $('#event_date_fin').val()==""?alertChampsObligatoire($('#event_date_fin')):$('#event_date_fin').val();
-		 var timeFin = $('#event_time_fin').val()==""?alertChampsObligatoire($('#event_time_fin')):$('#event_time_fin').val();
+		 var dateFin = $('#event_date_fin').val();
+		 var timeFin = $('#event_time_fin').val();
 		 info['date_fin'] = getTimeStamp(dateFin,timeFin);
 		 showed=0;
 		 if(champsObligatoireNotGood==0){
@@ -31,7 +31,7 @@ $(function() {
                info['nb_recurrence']    = $("#nb_recurrence option:selected").val();
             }
 
-            info['id_agenda']    = $('#id_agenda').val();
+            info['id_agenda']    =$('#agenda_group').val() == ""?alertChampsObligatoire($('#agenda_group')):$('#agenda_group').val();
             info['id_evenement'] = $('#id_evenement').val();
 			 //On Lancera que si tout les champs obligatoire sont ok
 
@@ -47,7 +47,7 @@ $(function() {
 			$.ajax({
 				url: URL,
 				type: 'POST',
-				data : {tab:info},
+				data : {tab : info},
 			})
 			.done(function(data) {   
                 data = JSON.parse(data);
@@ -75,11 +75,14 @@ $(function() {
 		detected=false;
 
 		});
+
+    //on click sur add event vidage des champs et masquage button supprimer
     $('.add_event').on('click', function() {
         $( '#div_champ_event input:text').each(function() {
             $(this).val('');
         });
         $('#event_description').val('');
+        $('#delete_event').hide();
     });
 
     var event_nom = {};
@@ -162,11 +165,16 @@ $(function() {
             },
         })
             .done(function(data) {
-                $("#prop_nom").text(data.nom);
-                $("#prop_description").text(data.description);
-                $("#prop_cp").text(data.lieu_cp);
-                $("#prop_ville").text(data.lieu_ville);
-                //$('#id_evenement').val(event_id);
+                $('#event_name').val(data.nom);
+                $('#event_description').val(data.description);
+                $('#lieu_cp').val(data.lieu_cp);
+                $('#lieu_ville').val(data.lieu_ville);
+                $('#id_evenement').val('');
+                if(event.rappel == 1){
+                    $('#event_rappel').prop('checked', true);
+                }
+        
+                $('#id_agenda').val(event.id_agenda);
             })
             .fail(function() {
                 verificationNotifications('{"notification":"error"}');
@@ -231,10 +239,19 @@ function getTimeStamp(myDate,myHours){
 		myDate=myDate.split("/");
 		myHours = myHours.split(':');
 		return(new Date(myDate[2],myDate[1]-1,myDate[0],myHours[0],myHours[1]).getTime()/1000);
-	}
+	}else{ //si vide alors toute la journéee
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth(); //January is 0!
+        var yyyy = today.getFullYear();
+        var today = dd+'/'+mm+'/'+yyyy+'@ 00:00'; 
+
+        return (new Date(today).getTime()/1000);   
+    }
 }
 
 function getDateEvent(myDate,myHours){
+
     if(myDate&&myHours){
         myDate=myDate.split("/");
         myHours = myHours.split(':');

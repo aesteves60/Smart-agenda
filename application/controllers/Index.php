@@ -61,15 +61,25 @@ class Index extends CI_Controller {
 
 			//Convertion des champs de la BDD vers les champs attendus par le plugin JS
 			foreach ($events as $event) {
-				$datas['events'][$j]['id'] 			= $event['id_evenement'];
-				$datas['events'][$j]['id_agenda'] 	= $event['id_agenda'];
-				$datas['events'][$j]['title'] 		= $event['nom_evenement'];
-				$datas['events'][$j]['start']		= date('Y-m-d', $event['date_deb']);
-				$datas['events'][$j]['end']			= date('Y-m-d', $event['date_fin']);
-				$datas['events'][$j]['start']		.= 'T'.date('H:i:s', $event['date_deb']);
-				$datas['events'][$j]['end']			.= 'T'.date('H:i:s', $event['date_fin']);
-				$datas['events'][$j]['backgroundColor'] = $c[$i];
-				$datas['events'][$j]['borderColor'] = $c[$i];
+				if(date('H:i:s', $event['date_deb'])=="00:00:00"){
+					$datas['events'][$j]['id'] 			= $event['id_evenement'];
+					$datas['events'][$j]['id_agenda'] 	= $event['id_agenda'];
+					$datas['events'][$j]['title'] 		= $event['nom_evenement'];
+					$datas['events'][$j]['start']		= date('Y-m-d', $event['date_deb']);
+					$datas['events'][$j]['allDay']		= true;
+					$datas['events'][$j]['backgroundColor'] = $c[$i];
+					$datas['events'][$j]['borderColor'] = $c[$i];
+				}else{
+					$datas['events'][$j]['id'] 			= $event['id_evenement'];
+					$datas['events'][$j]['id_agenda'] 	= $event['id_agenda'];
+					$datas['events'][$j]['title'] 		= $event['nom_evenement'];
+					$datas['events'][$j]['start']		= date('Y-m-d', $event['date_deb']);
+					$datas['events'][$j]['end']			= date('Y-m-d', $event['date_fin']);
+					$datas['events'][$j]['start']		.= 'T'.date('H:i:s', $event['date_deb']);
+					$datas['events'][$j]['end']			.= 'T'.date('H:i:s', $event['date_fin']);
+					$datas['events'][$j]['backgroundColor'] = $c[$i];
+					$datas['events'][$j]['borderColor'] = $c[$i];
+				}
 				$j++;
 			}
 		}

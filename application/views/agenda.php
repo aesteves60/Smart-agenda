@@ -116,11 +116,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month, week, day, listWeek'
+				right: 'month,agendaWeek,agendaDay,listWeek'
 			},
+			defaultView:'agendaWeek',
 			defaultDate: '<?= date('Y-m-d'); ?>',
 			navLinks: true, // can click day/week names to navigate views
 			editable: true,
+			weekNumbers: true,
 			eventLimit: true, // allow "more" link when too many events
 			timezone: "<?php echo 'UTC+'.date('Z')/3600; ?>",
 			events: 

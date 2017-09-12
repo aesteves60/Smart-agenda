@@ -52,6 +52,22 @@
 			</div>
 
 			<div class="row input-field">
+				<select id="agenda_group">
+					<?php if(is_array($agendas) && count($agendas) >= 1){
+					$i=0;
+					foreach ($agendas as $agenda){
+						echo "<option value='".$agenda['id_agenda']."'>".$agenda['nom']."</option>";
+  					}
+  					echo"ok";
+  				}else{
+  					echo $data['agendas'];
+  					echo "<option value='' disabled selected>Vous n'avez pas d'autre agenda enregistré. Créez-en un !</option>";
+  					}?>
+				</select>
+				<label for="agenda_group">Choisissez votre Agenda</label>
+			</div>
+
+			<div class="row input-field">
 				<input class="filled-in" type="checkbox" name="event_rappel" id="event_rappel">
 				<label for="event_rappel">Rappel</label>
 			</div>

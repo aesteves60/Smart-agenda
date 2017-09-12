@@ -16,7 +16,7 @@ class Event extends CI_Controller {
 
 		$this->load->model('Agenda_model');
         $data['popups'] = array( 1 => $this->load->view('accept_event', null, TRUE) );
-		$data["agenda"]=$this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
+		$data["agendas"]=$this->Agenda_model->getListByUser($this->session->Login['id_utilisateur']);
 		$this->load->view('templates/header');
 		$this->load->view('add_event',$data);
 		$this->load->view('templates/footer', $data);
