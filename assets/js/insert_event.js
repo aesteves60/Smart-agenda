@@ -51,7 +51,7 @@ $(function() {
 			})
 			.done(function(data) {   
                 data = JSON.parse(data);
-				notification('good', notification, 3000);
+				//notification('good', notification, 3000);
 
                 if(info['id_evenement'] != '' && info['id_evenement'] != null){
                 	$('#calendar').fullCalendar('renderEvent', {
@@ -62,7 +62,7 @@ $(function() {
                 	});
                 }
                 $('#modalAddEvent').modal('close'); 
-                location.reload();
+                //location.reload();
 			})
 			.fail(function() {
 				notification('error', 'Une erreur est survenue lors de l\'ajout à l\'agenda.', 5000);
@@ -244,9 +244,8 @@ function getTimeStamp(myDate,myHours){
         var dd = today.getDate();
         var mm = today.getMonth(); //January is 0!
         var yyyy = today.getFullYear();
-        var today = dd+'/'+mm+'/'+yyyy+'@ 00:00'; 
-
-        return (new Date(today).getTime()/1000);   
+        alert(new Date(yyyy,mm,dd,"00","00").getTime()/1000);
+        return (new Date(yyyy,mm,dd,"00","00".getTime()/1000);   
     }
 }
 

@@ -59,7 +59,7 @@ class Event_model extends CI_Model {
 
         if($id != NULL){
 
-            $tables = array('recurrence','Evenement', 'constituer');
+            $tables = array('recurrence','constituer', 'Evenement');
             $this->db->where('id_evenement', $id);
             $this->db->delete($tables);
 

@@ -66,6 +66,7 @@ class Index extends CI_Controller {
 					$datas['events'][$j]['id_agenda'] 	= $event['id_agenda'];
 					$datas['events'][$j]['title'] 		= $event['nom_evenement'];
 					$datas['events'][$j]['start']		= date('Y-m-d', $event['date_deb']);
+					$datas['events'][$j]['end']			= date('Y-m-d', $event['date_fin']);
 					$datas['events'][$j]['allDay']		= true;
 					$datas['events'][$j]['backgroundColor'] = $c[$i];
 					$datas['events'][$j]['borderColor'] = $c[$i];

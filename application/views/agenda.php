@@ -109,24 +109,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script>
 
 	$(document).ready(function() {	
- 		//$('.chips').material_chip();
 
 		$('#calendar').fullCalendar({
-			locale: 'fr',
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay,listWeek'
+				right: 'month,basicWeek,listWeek'
 			},
-			defaultView:'agendaWeek',
+			locale: 'fr',
+			defaultView: 'basicWeek',
 			defaultDate: '<?= date('Y-m-d'); ?>',
 			navLinks: true, // can click day/week names to navigate views
 			editable: true,
 			weekNumbers: true,
+			allDaySlot : true,
 			eventLimit: true, // allow "more" link when too many events
 			timezone: "<?php echo 'UTC+'.date('Z')/3600; ?>",
-			events: 
-				<?php echo $datas["events"]?>,
+
+			//events: 
+			//	<?php echo $datas["events"]?>,
 			eventClick: function(event, element) {
 				updateEvent(event);
 			}
