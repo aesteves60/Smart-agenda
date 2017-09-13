@@ -126,8 +126,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			eventLimit: true, // allow "more" link when too many events
 			timezone: "<?php echo 'UTC+'.date('Z')/3600; ?>",
 
-			//events: 
-			//	<?php echo $datas["events"]?>,
+			events: 
+				<?php echo $datas["events"]?>,
 			eventClick: function(event, element) {
 				updateEvent(event);
 			}

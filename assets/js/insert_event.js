@@ -239,13 +239,15 @@ function getTimeStamp(myDate,myHours){
 		myDate=myDate.split("/");
 		myHours = myHours.split(':');
 		return(new Date(myDate[2],myDate[1]-1,myDate[0],myHours[0],myHours[1]).getTime()/1000);
-	}else{ //si vide alors toute la journéee
+	}else if(myDate){ //si vide alors toute la journéee
+        myDate=myDate.split("/");
+        return (new Date(myDate[2],myDate[1]-1,myDate[0]).getTime()/1000);   
+    }else{
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth(); //January is 0!
         var yyyy = today.getFullYear();
-        alert(new Date(yyyy,mm,dd,"00","00").getTime()/1000);
-        return (new Date(yyyy,mm,dd,"00","00".getTime()/1000);   
+        return (new Date(yyyy,mm,dd).getTime()/1000);
     }
 }
 
