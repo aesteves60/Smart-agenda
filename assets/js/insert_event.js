@@ -164,23 +164,23 @@ $(function() {
             data: {event_nom: nom
             },
         })
-            .done(function(data) {
-                $('#event_name').val(data.nom);
-                $('#event_description').val(data.description);
-                $('#lieu_cp').val(data.lieu_cp);
-                $('#lieu_ville').val(data.lieu_ville);
-                $('#id_evenement').val('');
-                if(event.rappel == 1){
-                    $('#event_rappel').prop('checked', true);
-                }
-        
-                $('#id_agenda').val(event.id_agenda);
-            })
-            .fail(function() {
-                verificationNotifications('{"notification":"error"}');
-            })
-            .always(function() {
-            });
+        .done(function(data) {
+            $('#event_name').val(data.nom);
+            $('#event_description').val(data.description);
+            $('#lieu_cp').val(data.lieu_cp);
+            $('#lieu_ville').val(data.lieu_ville);
+            $('#id_evenement').val('');
+            if(event.rappel == 1){
+                $('#event_rappel').prop('checked', true);
+            }
+    
+            $("#agenda_group").val(1);
+        })
+        .fail(function() {
+            verificationNotifications('{"notification":"error"}');
+        })
+        .always(function() {
+        });
     }
 
     $('#event_recurrence').on('click', function() {

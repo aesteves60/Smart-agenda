@@ -58,9 +58,7 @@
 					foreach ($agendas as $agenda){
 						echo "<option value='".$agenda['id_agenda']."'>".$agenda['nom']."</option>";
   					}
-  					echo"ok";
   				}else{
-  					echo $data['agendas'];
   					echo "<option value='' disabled selected>Vous n'avez pas d'autre agenda enregistré. Créez-en un !</option>";
   					}?>
 				</select>

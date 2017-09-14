@@ -140,7 +140,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<?php if($this->uri->segment(1) != 'login' && $this->uri->segment(2) != 'inscription') { ?>
 		<header id="header" class="row">
-			<div class="s0 m9 col">
+
+<!-- 			<div class="col s6 green_b">10000</div>
+      		<div class="col s1 red_b">20000</div>
+      		<div class="col s1 red_b">30000</div> -->
+			<div class="col s3">
 				
 				<div class="fil_ariane s12 col">
 					<ul>
@@ -155,21 +159,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			</div>
 
-			<div class="s0 m3 col"><!--
-				<div id="switch-theme" class="switch mg-20 float-right">
+			<?php if($this->uri->segment(1) != 'login' && $this->uri->segment(2) == 'agenda') { ?>
+			<div class="col s6">
+			    <div class="nav-wrapper">
+			      <form>
+			        <div class="input-field">
+			          <input id="search" type="search" required>
+			          <label class="label-icon" for="search"><i class="fa fa-search"></i></label>
+			        </div>
+			      </form>
+			    </div>
+			</div>
+			
+
+			<div class="col s3 " ><?php } ?>
+<!-- 				<div id="switch-theme" class="switch mg-20 float-right">
 					<label>
 						<span class="orange">Clair</span>
 						<input id="choix-theme" type="checkbox" onchange="switchTheme()">
 						<span class="lever"></span>
 						Sombre
 					</label>
-				</div>-->
+				</div> -->
 				<div class="mg-20 float-right" >
 					<label id="div_date"></label></br>
 					<label id="div_heure"></label>
 				</div>
+			<?php if($this->uri->segment(1) != 'login' && $this->uri->segment(2) == 'agenda') { ?>
 			</div>
-
+			<?php } ?>
 		</header>
 		<?php } ?>
 
