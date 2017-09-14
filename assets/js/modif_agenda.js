@@ -132,7 +132,9 @@ function updateEvent(event){
 		}
 		
 		$('#id_evenement').val(event.id_evenement);
-		$('#id_agenda').val(event.id_agenda);
+		$('#agenda_group').val(event.id_agenda);
+		$('#agenda_group').material_select();
+
 
 		$('#delete_event').show();
 		$('#share_event').show();

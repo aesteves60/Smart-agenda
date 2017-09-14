@@ -117,7 +117,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				right: 'month,basicWeek,listWeek'
 			},
 			locale: 'fr',
-			defaultView: 'basicWeek',
+			defaultView: 'month',
 			defaultDate: '<?= date('Y-m-d'); ?>',
 			navLinks: true, // can click day/week names to navigate views
 			editable: true,
