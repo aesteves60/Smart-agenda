@@ -128,13 +128,8 @@ class TODO extends CI_Controller {
 			$name = $this->input->post('name');
 			$iaDetected = $this->Todo_model->rechercheSimilaire($name);
 			if($iaDetected != null){
-				$return = $iaDetected['score'].'_'.$iaDetected['id_element_todo'].'_'.$iaDetected['titre'].'_'.$iaDetected['description'];
-				echo $return;
-			} else {
-				echo 'nok';
+				echo json_encode($iaDetected);;
 			}
-		} else {
-			echo 'nok';
 		}
 	}
 

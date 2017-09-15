@@ -7,7 +7,7 @@ class Todo_model extends CI_Model {
 
 		parent::__construct();
 
-	} 
+	}
 
 	public function Get_All_Todo(){
 
@@ -120,7 +120,20 @@ class Todo_model extends CI_Model {
 	}
 
 	public function rechercheSimilaire($name = NULL){
-		//recherche des evenement potentiellement recherchble
+
+		this->db->select("ET.*");
+        $this->db->from("element_todo ET");
+        $this->db->join("constituer", "E.id_evenement = constituer.id_evenement", "LEFT");
+        $this->db->join("Agenda", "Agenda.id_agenda = constituer.id_agenda", "LEFT");
+        $this->db->where("Agenda.id_utilisateur", $this->session->userdata("Login")["id_utilisateur"]);
+        $this->db->like('E.nom', $laRecherche, 'after');
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+
+
+		/*//recherche des evenement potentiellement recherchble
 		$dateDuJour = new DateTime();
 
 		//oné recupère tout les ia todos
@@ -172,7 +185,7 @@ class Todo_model extends CI_Model {
 				}
 			}	
 			return $iaDetected;
-		} 
+		} */
 	}
 	public function Insert_ia_todo($id_element_todo){
 		$dateDuJour = new DateTime();

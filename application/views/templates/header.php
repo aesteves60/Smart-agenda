@@ -27,6 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src='<?= asset_url(); ?>libs/fullcalendar/moment.min.js'></script>
 	<script src='<?= asset_url(); ?>libs/fullcalendar/fullcalendar.min.js'></script>
 	<script src='<?= asset_url(); ?>libs/fullcalendar/locale-all.js'></script>
+	<script src='<?= asset_url(); ?>libs/fullcalendar/gcal.min.js'></script>
 
 </head>
 

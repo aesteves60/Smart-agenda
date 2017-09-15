@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				<div class="row">
 					<div id="title" class="header input-field s12 m6 col">
-						<input type="text" name="todo_name" id="todo_name" />
+						<input type="text" name="todo_name" id="todo_name" class="autocomplete" />
 						<label for="todo_name">Titre</label>
 					</div>
 

@@ -125,7 +125,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			allDaySlot : true,
 			eventLimit: true, // allow "more" link when too many events
 			timezone: "<?php echo 'UTC+'.date('Z')/3600; ?>",
-
+			//googleCalendarApiKey: '2Ykryogv8v-VVd8lN3l8WSS6',
+        	//events: {
+            //	googleCalendarId: 'vbo62fi66vrkve9o8l8kt8bsac@group.calendar.google.com',
+            //	className: 'gcal-event' // an option!
+        	//}
 			events: 
 				<?php echo $datas["events"]?>,
 			eventClick: function(event, element) {
