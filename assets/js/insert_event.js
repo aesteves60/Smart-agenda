@@ -85,46 +85,13 @@ $(function() {
         $('#delete_event').hide();
     });
 
-    var event_nom = {};
-    var detected = false;
     $('#event_name').on('keyup',function(){
-    	var titre = $('#event_name').val();
-    	nbFrape ++;
-        if (titre.length > 1 && nbFrape >= 1) {
-            nbFrape = 0;
-            $.ajax({
-                url: BASE_URL + 'Event/chercheSimilaire',
-                type: 'POST',
-                dataType: 'JSON',
-                data: {
-                    titre: titre
-                },
-            })
-            .done(function (reponse) {
-                if (reponse) {
-                    //var json = $.parseJSON(reponse);
-                    //event_id = ArrayReponse[0].id;
-                     for (var i=0;i<reponse.length;i++)
-                    {
-                        event_nom[reponse[i].nom]=i;
-                    }
-                    $('input.autocomplete').autocomplete({
-                        data: event_nom,
-                        limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
-                        onAutocomplete: function(val) {
-                            affichePropositionEvent(val);    
-                        },
-                        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-                    });
-                }
-            })
-            .fail(function () {
-                //verificationNotifications('{"notification":"error"}');
-            })
-            .always(function () {
-            });
-        }
+    	autocomplete(this);
 	});
+
+    $('#search').on('keyup',function(){
+        autocomplete(this);
+    });
 
 
     $('#delete_event').on('click', function() {
@@ -154,34 +121,6 @@ $(function() {
 
         $('#modalShareEvent').modal('open');
     });*/
-
-    function affichePropositionEvent(nom){
-
-        $.ajax({
-            url: BASE_URL+'Event/getEventByNom',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {event_nom: nom
-            },
-        })
-        .done(function(data) {
-            $('#event_name').val(data.nom);
-            $('#event_description').val(data.description);
-            $('#lieu_cp').val(data.lieu_cp);
-            $('#lieu_ville').val(data.lieu_ville);
-            $('#id_evenement').val('');
-            if(event.rappel == 1){
-                $('#event_rappel').prop('checked', true);
-            }
-    
-            $("#agenda_group").val(1);
-        })
-        .fail(function() {
-            verificationNotifications('{"notification":"error"}');
-        })
-        .always(function() {
-        });
-    }
 
     $('#event_recurrence').on('click', function() {
         if($('#event_recurrence').is(':checked') == true){
@@ -231,7 +170,78 @@ $(function() {
 
         }
     });
+
+    function affichePropositionEvent(nom){
+        $('#modalAddEvent').modal('open');
+        $.ajax({
+            url: BASE_URL+'Event/getEventByNom',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {event_nom: nom
+            },
+        })
+        .done(function(data) {
+            $('#event_name').val(data.nom);
+            $('#event_description').val(data.description);
+            $('#lieu_cp').val(data.lieu_cp);
+            $('#lieu_ville').val(data.lieu_ville);
+            $('#id_evenement').val('');
+            if(event.rappel == 1){
+                $('#event_rappel').prop('checked', true);
+            }
+            $("#agenda_group option[value="+data.id_agenda+"]").prop('selected', true);
+            $('#agenda_group').material_select();
+
+        })
+        .fail(function() {
+            verificationNotifications('{"notification":"error"}');
+        })
+        .always(function() {
+        });
+    }
+
+    var event_nom = {};
+    function autocomplete(element){
+        var titre = $(element).val();
+        nbFrape ++;
+        if (titre.length > 1 && nbFrape >= 1) {
+            nbFrape = 0;
+            $.ajax({
+                url: BASE_URL + 'Event/chercheSimilaire',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    titre: titre
+                },
+            })
+            .done(function (reponse) {
+                if (reponse) {
+                    //var json = $.parseJSON(reponse);
+                    //event_id = ArrayReponse[0].id;
+                     for (var i=0;i<reponse.length;i++)
+                    {
+                        event_nom[reponse[i].nom]="http://ictadmin.com.au/images/page_art/fa-globe_256_20_0077bb_none.png";
+                    }
+                    $('input.autocomplete').autocomplete({
+                        data: event_nom,
+                        limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
+                        onAutocomplete: function(val) {
+                            affichePropositionEvent(val);
+                        },
+                        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+                    });
+                }
+            })
+            .fail(function () {
+                //verificationNotifications('{"notification":"error"}');
+            })
+            .always(function () {
+            });
+        }
+    }
+
 });
+
 
 
 function getTimeStamp(myDate,myHours){

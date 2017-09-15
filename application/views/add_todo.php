@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				<h3>Mes Mémos</h3>
 
-				<ul id="listeMemos" class="collapsible" data-collapsible="expandable">
+				<ul id="listeMemos" class="collapsible popout" data-collapsible="expandable">
 				
 				<?php
 				if($todo != NULL && is_array($todo)) {

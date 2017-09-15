@@ -144,7 +144,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- 			<div class="col s6 green_b">10000</div>
       		<div class="col s1 red_b">20000</div>
       		<div class="col s1 red_b">30000</div> -->
-			<div class="col s3">
+			<div class="col s4">
 				
 				<div class="fil_ariane s12 col">
 					<ul>
@@ -160,11 +160,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 
 			<?php if($this->uri->segment(1) != 'login' && $this->uri->segment(2) == 'agenda') { ?>
-			<div class="col s6">
+			<div class="col s5">
 			    <div class="nav-wrapper">
 			      <form>
 			        <div class="input-field">
-			          <input id="search" type="search" required>
+			          <input id="search" type="search" class="autocomplete" required placeholder="recherche événement">
 			          <label class="label-icon" for="search"><i class="fa fa-search"></i></label>
 			        </div>
 			      </form>
@@ -172,7 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 			
 
-			<div class="col s3 " ><?php } ?>
+			<div class="col s3" ><?php } ?>
 <!-- 				<div id="switch-theme" class="switch mg-20 float-right">
 					<label>
 						<span class="orange">Clair</span>
