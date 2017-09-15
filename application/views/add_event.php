@@ -56,7 +56,7 @@
 					<?php if(is_array($agendas) && count($agendas) >= 1){
 					$i=0;
 					foreach ($agendas as $agenda){
-						echo "<option value='".$agenda['id_agenda']."'>".$agenda['nom']."</option>";
+						echo '<option value="'.$agenda['id_agenda'].'">'.$agenda['nom'].'</option>';
   					}
   				}else{
   					echo "<option value='' disabled selected>Vous n'avez pas d'autre agenda enregistré. Créez-en un !</option>";
@@ -113,7 +113,7 @@
 
 		<div class="modal-footer text-right row">
 			<span class="button alert-inverted float-left hidden_not_imp" id="delete_event">Supprimer</span>
-			<!--<span class="button tertiary float-left hidden_not_imp mg-left-5" id="share_event">Partager</span>-->
+			<span class="button tertiary float-left hidden_not_imp mg-left-5" id="share_event">Partager</span>
 			<input type="button" id="valid_event" name="valid_event" value="Enregistrer" class="button" />
 			<span class="modal-action modal-close button secondary">Fermer</span>
 		</div>
